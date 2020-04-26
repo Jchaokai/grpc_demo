@@ -1,0 +1,40 @@
+syntax = "proto3";
+package services;
+
+import "google/api/annotations.proto";
+import "product.proto";
+
+message request {
+    string name = 1;
+    string gender = 2;
+}
+message response {
+    string res = 1;
+}
+
+message query_size {
+    int32 size = 1; //查询数量
+}
+message product_list {
+    repeated response res = 1;  //返回的多个结果
+}
+
+service hello {
+    rpc hello (request) returns (response) {
+        option (google.api.http) = {
+            get: "/hello/{name}"
+        };
+    }
+}
+
+service Product{
+    rpc SomeProduct(query_size) returns(product_list){
+      option(google.api.http)={
+        get:"/products/{size}"
+      };
+    };
+    rpc ProductInfo(query_size) returns(services.ProductInfo){};
+}
+
+
+

@@ -1,0 +1,20 @@
+syntax = "proto3";
+package services;
+import "google/api/annotations.proto";
+import "product.proto";
+
+message orderResponse{
+    string status =1;
+    string message =2;
+}
+message orderRequest{
+    services.ProductInfo order =1;
+}
+service Order{
+    rpc NewOrder(orderRequest) returns (orderResponse){
+        option(google.api.http) = {
+            post:"/order/new"
+            body:"order"
+        };
+    };
+}

@@ -1,0 +1,12 @@
+syntax="proto3";
+
+package services;
+import "google/protobuf/timestamp.proto";
+
+message ProductInfo{
+    int32 pid =1;
+    string pname =2;
+    float price =3;
+    google.protobuf.Timestamp time=4;   //进货时间
+}
+
